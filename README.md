@@ -41,6 +41,9 @@ php artisan key:generate
 # Run migrations
 php artisan migrate
 
+# Seed application
+php artisan db:seed
+
 # Create storage link for images
 php artisan storage:link
 
