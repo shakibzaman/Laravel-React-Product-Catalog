@@ -22,8 +22,8 @@ A modern web application built with Laravel 11 and React.js for managing and dis
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/shakibzaman/Laravel-Product-Catalog-React.git
-cd Laravel-Product-Catalog-React
+git clone https://github.com/shakibzaman/Laravel-React-Product-Catalog.git
+cd Laravel Project Direcoty
 ```
 
 ### 2. Backend Setup
