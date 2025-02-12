@@ -16,6 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         // ... existing code ...
         \Fruitcake\Cors\HandleCors::class,
+        \App\Http\Middleware\Cors::class
     ];
 
     /**
@@ -25,10 +26,10 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         // ... existing code ...
-        
+
         'api' => [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -43,4 +44,4 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // ... existing code ...
     ];
-} 
+}

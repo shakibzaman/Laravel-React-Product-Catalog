@@ -16,30 +16,18 @@ class MediaController extends Controller
             ->header('Access-Control-Max-Age', '86400'); // 24 hours
     }
 
-    public function serveImage(Request $request, $path)
+    public function serveImage($path)
     {
-        // Handle preflight OPTIONS request
-        if ($request->isMethod('OPTIONS')) {
-            return $this->addCorsHeaders(response('', 200));
+        $path = storage_path('app/public/products/' . $path);
+
+        if (!file_exists($path)) {
+            return response()->json(['message' => 'Image not found'], 404);
         }
 
-        $fullPath = 'public/images/products/' . $path;
-        
-        if (!Storage::exists($fullPath)) {
-            $fullPath = 'public/images/products/default.png';
-        }
-
-        try {
-            $file = Storage::get($fullPath);
-            $type = Storage::mimeType($fullPath);
-
-            return $this->addCorsHeaders(
-                response($file)
-                    ->header('Content-Type', $type)
-                    ->header('Cache-Control', 'public, max-age=31536000')
-            );
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Image not found'], 404);
-        }
+        return response()->file($path, [
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => 'GET, OPTIONS',
+            'Access-Control-Allow-Headers' => 'X-Requested-With, Content-Type, X-Token-Auth, Authorization'
+        ]);
     }
-} 
+}
